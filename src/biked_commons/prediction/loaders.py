@@ -4,6 +4,19 @@ import os
 import requests
 from tqdm import tqdm
 
+def load_usability(target_type: str):
+    if target_type == 'cont':
+        X_train = pd.read_csv('resources/datasets/split_datasets/usability_cont_norm_X_train.csv', index_col=0)
+        X_test = pd.read_csv('resources/datasets/split_datasets/usability_cont_norm_X_test.csv', index_col=0)
+        Y_train = pd.read_csv('resources/datasets/split_datasets/usability_cont_Y_train.csv', index_col=0)
+    elif target_type == 'binary':
+        X_train = pd.read_csv('resources/datasets/split_datasets/usability_binary_X_train.csv', index_col=0)
+        X_test = pd.read_csv('resources/datasets/split_datasets/usability_binary_X_test.csv', index_col=0)
+        Y_train = pd.read_csv('resources/datasets/split_datasets/usability_binary_Y_train.csv', index_col=0)
+    else:
+        raise ValueError("Invalid target type. Choose either 'cont' or 'binary'.")
+    return X_train, Y_train, X_test
+
 def load_validity():
     X_train = pd.read_csv('../../resources/datasets/split_datasets/validity_X_train.csv', index_col=0)
     X_test = pd.read_csv('../../resources/datasets/split_datasets/validity_X_test.csv', index_col=0)
