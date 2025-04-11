@@ -13,7 +13,7 @@ class MLP(nn.Module):
             layers.append(nn.ReLU())
             layers.append(nn.Dropout(dropout_rate))
             prev_dim = hidden_dim
-        layers.append(nn.Linear(prev_dim, 1))  # Output layer for regression task
+        layers.append(nn.Linear(prev_dim, 1))  
         self.network = nn.Sequential(*layers)
         
         self.lr = lr
@@ -50,7 +50,7 @@ class MLP(nn.Module):
                 loss = self.criterion(y_pred, y_batch)
                 val_loss += loss.item()
 
-        print(f"Validation Loss: {val_loss / len(val_loader)}")
-
+        # print(f"Validation Loss: {val_loss / len(val_loader)}")
+        return val_loss / len(val_loader)
 
 

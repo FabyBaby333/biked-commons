@@ -7,7 +7,7 @@ from sklearn.metrics import r2_score
 from biked_commons.bike_embedding.clip_embedding_calculator import ClipEmbeddingCalculatorImpl
 from biked_commons.bike_embedding.embedding_comparator import get_cosine_similarity
 from biked_commons.bike_embedding.embedding_predictor import EmbeddingPredictor
-from utils_for_tests import path_of_test_resource
+from test.utils_for_tests import path_of_test_resource
 
 
 class EmbeddingPredictorTest(unittest.TestCase):

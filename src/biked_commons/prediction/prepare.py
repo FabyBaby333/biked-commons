@@ -5,8 +5,11 @@ import os
 import requests
 from tqdm import tqdm
 
+from biked_commons.resource_utils import resource_path
+
+
 def prepare_validity():
-    df = pd.read_csv('../../resources/datasets/raw_datasets/validity.csv', index_col=0)
+    df = pd.read_csv(resource_path('datasets/raw_datasets/validity.csv'), index_col=0)
     df = df.reset_index(drop=True)
     subset = df[df['valid'].isin([0, 2])]
     Y = subset['valid']
@@ -14,13 +17,13 @@ def prepare_validity():
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0, stratify=Y)
 
-    X_train.to_csv('../../resources/datasets/split_datasets/validity_X_train.csv')
-    X_test.to_csv('../../resources/datasets/split_datasets/validity_X_test.csv')
-    Y_train.to_csv('../../resources/datasets/split_datasets/validity_Y_train.csv')
-    Y_test.to_csv('../../resources/datasets/split_datasets/validity_Y_test.csv')
+    X_train.to_csv(resource_path('datasets/split_datasets/validity_X_train.csv'))
+    X_test.to_csv(resource_path('datasets/split_datasets/validity_X_test.csv'))
+    Y_train.to_csv(resource_path('datasets/split_datasets/validity_Y_train.csv'))
+    Y_test.to_csv(resource_path('datasets/split_datasets/validity_Y_test.csv'))
 
 def prepare_structure():
-    df = pd.read_csv('../../resources/datasets/raw_datasets/structure.csv', index_col=0)
+    df = pd.read_csv(resource_path('datasets/raw_datasets/structure.csv'), index_col=0)
     df = df.reset_index(drop=True)
 
     sim_1_displacements = df[["Sim 1 Dropout X Disp.", "Sim 1 Dropout Y Disp.", "Sim 1 Bottom Bracket X Disp.", "Sim 1 Bottom Bracket Y Disp."]].values
@@ -47,13 +50,13 @@ def prepare_structure():
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
 
-    X_train.to_csv('../../resources/datasets/split_datasets/structure_X_train.csv')
-    X_test.to_csv('../../resources/datasets/split_datasets/structure_X_test.csv')
-    Y_train.to_csv('../../resources/datasets/split_datasets/structure_Y_train.csv')
-    Y_test.to_csv('../../resources/datasets/split_datasets/structure_Y_test.csv')
+    X_train.to_csv(resource_path('datasets/split_datasets/structure_X_train.csv'))
+    X_test.to_csv(resource_path('datasets/split_datasets/structure_X_test.csv'))
+    Y_train.to_csv(resource_path('datasets/split_datasets/structure_Y_train.csv'))
+    Y_test.to_csv(resource_path('datasets/split_datasets/structure_Y_test.csv'))
 
 def prepare_aero():
-    df = pd.read_csv('../../resources/datasets/raw_datasets/aero.csv', index_col=0)
+    df = pd.read_csv(resource_path('datasets/raw_datasets/aero.csv'), index_col=0)
     df = df.reset_index(drop=True)
 
     Y = df["drag"]
@@ -61,10 +64,10 @@ def prepare_aero():
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
 
-    X_train.to_csv('../../resources/datasets/split_datasets/aero_X_train.csv')
-    X_test.to_csv('../../resources/datasets/split_datasets/aero_X_test.csv')
-    Y_train.to_csv('../../resources/datasets/split_datasets/aero_Y_train.csv')
-    Y_test.to_csv('../../resources/datasets/split_datasets/aero_Y_test.csv')
+    X_train.to_csv(resource_path('datasets/split_datasets/aero_X_train.csv'))
+    X_test.to_csv(resource_path('datasets/split_datasets/aero_X_test.csv'))
+    Y_train.to_csv(resource_path('datasets/split_datasets/aero_Y_train.csv'))
+    Y_test.to_csv(resource_path('datasets/split_datasets/aero_Y_test.csv'))
 
 def download_file(file_url, file_path):
     """Downloads a file with a progress bar if it doesn't exist locally."""
@@ -95,11 +98,11 @@ def check_download_CLIP_data():
     # File paths and URLs
     x_id = "10541435"
     x_url = f"https://dataverse.harvard.edu/api/access/datafile/{x_id}"
-    x_file = "../../resources/datasets/split_datasets/CLIP_X_train.csv"
+    x_file = resource_path('datasets/split_datasets/CLIP_X_train.csv')
 
     y_id = "10992683"
     y_url = f"https://dataverse.harvard.edu/api/access/datafile/{y_id}"
-    y_file = "../../resources/datasets/split_datasets/CLIP_Y_train.npy"
+    y_file = resource_path('datasets/split_datasets/CLIP_Y_train.npy')
 
     # Check and download X
     if not os.path.exists(x_file):

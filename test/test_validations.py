@@ -11,7 +11,7 @@ from biked_commons.validation.clip_validation_functions import CLIPS_VALIDATIONS
 from biked_commons.validation.raw_validation_functions import RAW_VALIDATION_FUNCTIONS
 from biked_commons.xml_handling.algebraic_parser import AlgebraicParser
 from biked_commons.xml_handling.bike_xml_handler import BikeXmlHandler
-from utils_for_tests import path_of_test_resource
+from test.utils_for_tests import path_of_test_resource
 
 
 class ValidationsTest(unittest.TestCase):

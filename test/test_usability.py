@@ -36,6 +36,19 @@ class BinaryUsabilityTest(unittest.TestCase):
         self.assertIsInstance(result, float)
         self.assertGreaterEqual(result, 0.0)
         self.assertLessEqual(result, 1.0)
+
+    def test_evaluator_output_scaled(self):
+        data = {'Saddle height': [0.45104834], 'Stack': [0.4110677], 'CS textfield': [0.215]}
+        data_df = pd.DataFrame(data)
+        preds = self.predictor.predict(data_df)
+        self.assertGreaterEqual(preds[0], 0.0)
+        self.assertLessEqual(preds[0], 1.0)
+
+    def test_input_not_dataframe(self):
+        data = [[0.45104834, 0.4110677, 0.215]]
+        preds = self.predictor.predict(data)
+        self.assertGreaterEqual(preds[0], 0.0)
+        self.assertLessEqual(preds[0], 1.0)
     
 
 class ContinuousUsabilityTest(unittest.TestCase):
@@ -68,5 +81,11 @@ class ContinuousUsabilityTest(unittest.TestCase):
         data = {'Saddle height': [768.0], 'Stack': [565.6], 'CS textfield': [430]}
         data_df = pd.DataFrame(data)
         preds = self.predictor.predict(data_df)
+        self.assertGreaterEqual(preds[0], 0.0)
+        self.assertLessEqual(preds[0], 1.0)
+
+    def test_input_not_dataframe(self):
+        data = [[768.0,565.6,430]]
+        preds = self.predictor.predict(data)
         self.assertGreaterEqual(preds[0], 0.0)
         self.assertLessEqual(preds[0], 1.0)
